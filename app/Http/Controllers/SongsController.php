@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;//DBのマイグレーションを使う 
 use App\song;// "song.php" モデルを使う
-// モデルからデータを持ってくる
+// songモデルからデータを持ってくる
+
+
 class SongsController extends Controller
 {
     /**
@@ -27,6 +29,7 @@ class SongsController extends Controller
         // // URL:"songs". "index.blade.php", '$songs'  
         //  URL:"songs"に行ったら "index.blade.php"画面に　my_songsテーブル全データが出力
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -66,9 +69,18 @@ class SongsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    // データ取得方法
+
+    // public function edit(Song $song)　...データIDの取得 やり方１
+                    // モデル名:Song   $song: Routs list でsongs/song/editeの真ん中のsongID
+     // return view('songs.edit', compact('song'));　
+
+     public function edit($id)// ...データIDの取得 やり方１     
     {
-        //
+        $song = song::find($id);// songモデルで　songテーブルのデータから IDを取得
+        return view('songs.edit', compact('song'));　
+      　　　　　  // URL(songs). viewのページ(edit).  テーブルのデータ(song)
     }
 
     /**
