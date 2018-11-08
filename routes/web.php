@@ -1,5 +1,4 @@
 <?php
-namespace web;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -9,32 +8,47 @@ namespace web;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/Route::get('/', function () {
+      return view('Welcome');
+  });
 
-Route::get('/', function () {
-  $name = 'Yuma Ito';
+Route::get('/about', function () {//about.blade.php 
+  $bitfumes = ['This','is','bitfumes'];
+     return view('about',['bitfumes'=>$bitfumes]); 
+  // return view('about')->withBitfumes($bitfumes); 
+  // return view('about',compact('bitfumes')); Line: 17,18,19 Same Way
 
-  $aga = 22;
-
-  $tasks = [
-
-  	 'I learn PHP',
-
-  	 'In framgia',
-
-  	 'From japan'
-  	];
-
-   return view('welcome', compact('mame', 'age', 'tasks'));
-    //                           Yuma Ito   22
+  // about.blade.php に　['This','is','bitfumes'] が表示される
 });
 
-Route::get('/about', 'PagesController@about');
+
+// [Route get Controller]
+Route::get('/','PageController@welcome');
+Route::get('about','PagesController@about');
+Route::resource('songs','SongsController');
+// "php artisan make:Controller SongsController --resource"コマンドで CongsControllerに　[@index, @delete, @store]ファンクションが作られる
+// "php artisan route:list" コマンドでRoute::resourceのリストが見れる
 
 
 
 
 
+
+
+// [Route, Controller, View and Model]
+
+// Route::get('list','UserController@Userlist')->name('Userlist');
+
+// Route::get('add','UserController@createUser')->name('createUser');
+
+// [Route and Controller]
+// Route::get('home', 'HomeController@home')->name('home');
+
+// [Route and View]
+//  // URL/home にしたらブラウザーに 'Home.blade.php'が表示
+// Route::get('/home', function () {
+//       return view('Home');
+//     });
 
 // Route::get('/', function () {
 
@@ -46,7 +60,6 @@ Route::get('/about', 'PagesController@about');
 //     	'Go to the store',
 //     	'Finish my screencast',
 //     	'Clean the house'
-
 //     ];
 
 //     return view('welcome',compact('name', 'age','tasks'));

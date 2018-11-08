@@ -9,11 +9,20 @@
 
         <ul>
 
-        	<?php foreach ($tasks as $task): ?>
+        	@foreach ($tasks as $task)
+
+        	  <!--  <li>{{ $task }}</li> -->
+
+        	   <li>{{ $task->body }}</li>
+        	   <!-- table_db.php の$table->text('body');を示す -->
+
+        	@endforeach   
+
+        	<!-- <?php foreach ($tasks as $task): ?>
 
         	   <li><?= $task; ?></li>
         		
-        	<?php endforeach; ?>
+        	<?php endforeach; ?> -->
         </ul>
 </body>
 </html>
